@@ -21,62 +21,15 @@ items.push(new Item("Conjured Mana Cake", 3, 6));
 
 export const updateQuality = () => {
   for(let item of items) {
-      if(item.name === 'Aged Brie') {
-          if(item.quality <= 50) {
-              item.quality ++;
-              item.sellIn --;
-          }
-          item.quality = Math.min(50, item.quality);
-          item.sellIn = Math.max(0, item.sellIn);
-      }
-
-      if(item.name === 'Elixir of the Mongoose') {
-          if(item.quality <= 50) {
-              item.quality--;
-              item.sellIn--;
-          }
-          item.quality = Math.min(50, item.quality);
-          item.sellIn = Math.max(0, item.sellIn);
-      }
-
-      if(item.name === 'Sulfuras, Hand of Ragnaros') {
-        if(item.quality <= 50) {
-            item.quality = item.quality;
-            item.sellIn = item.sellIn;
-          }
-        }
-
-      if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-        if (item.sellIn <= 0) {
-          item.quality = 0;
-          } else if (item.sellIn <= 6) {
-            item.quality += 3;
-          } else if (item.sellIn <= 11) {
-            item.quality += 2;
-          } else {
-            item.quality += 1;
-          }
-        
-          item.sellIn--;
-          item.quality = Math.min(50, item.quality);
-          item.sellIn = Math.max(0, item.sellIn);
-        }
-
-        if(item.name.includes('Conjured')) {
-          if(item.sellIn <= 50) {
-          item.quality -= 2;
-          item.sellIn--;
+    switch (item.name) {
+      case 'Aged Brie':
+        item.sellIn = Math.max(0, item.sellIn - 1);
+        if(item.sellIn === 0) {
+          item.quality = Math.min(50, item.quality + 2);
         } else {
-          item.quality--;
-          item.sellIn--;
+          item.quality = Math.min(50, item.quality + 1);
         }
-        item.quality = Math.min(50, item.quality);
-        item.sellIn = Math.max(0, item.sellIn);
-      }
-      
-      if(item.name !== 'Aged Brie' && item.name !== 'Backstage passes to a TAFKAL80ETC concert' && item.name !== 'Sulfuras, Hand of Ragnaros' && item.name !== 'Elixir of the Mongoose' && !item.name.includes('Conjured')) {
-        item.quality--;
-        item.sellIn--;
-      }
-  }     
+        break;
+    }
+  }
 }
