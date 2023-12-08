@@ -1,3 +1,7 @@
+
+
+
+
 export class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
@@ -42,9 +46,9 @@ export const updateQuality = () => {
           }
         }
 
-        if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-          if (item.sellIn <= 0) {
-            item.quality = 0;
+      if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+        if (item.sellIn <= 0) {
+          item.quality = 0;
           } else if (item.sellIn <= 6) {
             item.quality += 3;
           } else if (item.sellIn <= 11) {
@@ -57,5 +61,22 @@ export const updateQuality = () => {
           item.quality = Math.min(50, item.quality);
           item.sellIn = Math.max(0, item.sellIn);
         }
+
+        if(item.name.includes('Conjured')) {
+          if(item.sellIn <= 50) {
+          item.quality -= 2;
+          item.sellIn--;
+        } else {
+          item.quality--;
+          item.sellIn--;
+        }
+        item.quality = Math.min(50, item.quality);
+        item.sellIn = Math.max(0, item.sellIn);
+      }
+      
+      if(item.name !== 'Aged Brie' && item.name !== 'Backstage passes to a TAFKAL80ETC concert' && item.name !== 'Sulfuras, Hand of Ragnaros' && item.name !== 'Elixir of the Mongoose' && !item.name.includes('Conjured')) {
+        item.quality--;
+        item.sellIn--;
+      }
   }     
 }

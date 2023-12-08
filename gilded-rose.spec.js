@@ -1,17 +1,17 @@
 import { expect, describe, it } from "vitest";
 import { Item, items, updateQuality } from "./gilded-rose.js";
 
-// describe("updateQuality", () => {
-//   it("reduces quality and sellIn of basic items by 1", () => {
-//     const testItem = new Item("basic", 5, 3);
-//     items.push(testItem);
+describe("updateQuality", () => {
+  it("reduces quality and sellIn of basic items by 1", () => {
+    const testItem = new Item("basic", 5, 3);
+    items.push(testItem);
 
-//     updateQuality();
+    updateQuality();
 
-//     expect(testItem.quality).toBe(2);
-//     expect(testItem.sellIn).toBe(4);
-//   });
-// });
+    expect(testItem.quality).toBe(2);
+    expect(testItem.sellIn).toBe(4);
+  });
+});
 
 describe('updateQuality', () => {
   it('quality + 1, sellIn -1', () => {
@@ -84,3 +84,17 @@ describe('updateQuality', () => {
     expect(testItem.sellIn).toBe(5);
   });
 });
+
+describe('updateQuality', () => {
+  it('quality decreases twice as fast', () => {
+    const testItem = new Item('Conjured Item', 6, 25)
+    items.push(testItem);
+
+    updateQuality();
+
+    expect(testItem.quality).toBe(23);
+    expect(testItem.sellIn).toBe(5);
+  });
+});
+
+
