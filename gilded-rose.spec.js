@@ -1,17 +1,19 @@
 import { expect, describe, it } from "vitest";
 import { Item, items, updateQuality } from "./gilded-rose.js";
 
-// describe("updateQuality", () => {
-//   it("reduces quality and sellIn of basic items by 1", () => {
-//     const testItem = new Item("basic", 5, 3);
-//     items.push(testItem);
 
-//     updateQuality();
+//BASIC ITEMS TEST
+describe("updateQuality", () => {
+  it("reduces quality and sellIn of basic items by 1", () => {
+    const testItem = new Item("basic", 5, 3);
+    items.push(testItem);
 
-//     expect(testItem.quality).toBe(2);
-//     expect(testItem.sellIn).toBe(4);
-//   });
-// });
+    updateQuality();
+
+    expect(testItem.quality).toBe(2);
+    expect(testItem.sellIn).toBe(4);
+  });
+});
 
 //AGED BRIE TESTS========================================
 describe('updateQuality', () => {
@@ -38,7 +40,59 @@ describe('updateQuality', () => {
   });
 });
 
-//ELIXIR OF THE MONGOOSE TESTS
+//SULFURAS, HAND OF RAGNAROS==================================
+describe('updateQuality', () => {
+  it('Sulfuras does not change', () => {
+    const testItem = new Item('Sulfuras, Hand of Ragnaros', 0, 80)
+    items.push(testItem);
+
+    updateQuality();
+
+    expect(testItem.quality).toBe(80);
+    expect(testItem.sellIn).toBe(0);
+  });
+});
+
+//BACKSTAGE TICKETS TESTS=========================================
+describe('updateQuality', () => {
+  it('quality ++, sellIn --', () => {
+    const testItem = new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)
+    items.push(testItem);
+
+    updateQuality();
+
+    expect(testItem.quality).toBe(21);
+    expect(testItem.sellIn).toBe(14);
+  });
+});
+
+describe('updateQuality', () => {
+  it('quality +2, sellIn --', () => {
+    const testItem = new Item('Backstage passes to a TAFKAL80ETC concert', 11, 20)
+    items.push(testItem);
+
+    updateQuality();
+
+    expect(testItem.quality).toBe(22);
+    expect(testItem.sellIn).toBe(10);
+  });
+});
+
+
+describe('updateQuality', () => {
+  it('quality +3, sellIn --', () => {
+    const testItem = new Item('Backstage passes to a TAFKAL80ETC concert', 6, 20)
+    items.push(testItem);
+
+    updateQuality();
+
+    expect(testItem.quality).toBe(23);
+    expect(testItem.sellIn).toBe(5);
+  });
+});
+
+//CONJURED ITEMS TEST
+
 
 // describe('updateQuality', () => {
 //   it('sellIn does not go below 0', () => {
