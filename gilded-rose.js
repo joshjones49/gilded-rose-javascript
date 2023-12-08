@@ -22,6 +22,7 @@ items.push(new Item("Conjured Mana Cake", 3, 6));
 export const updateQuality = () => {
   for(let item of items) {
     switch (item.name) {
+      
       case 'Sulfuras, Hand of Ragnaros':
         break;
 
@@ -48,12 +49,13 @@ export const updateQuality = () => {
         break;
 
         default:
-          if(item.name.includes('Conjured')) {
-            item.quality = Math.max(0, item.sellIn < 0 ? item.quality - 4 : item.quality - 2);
+          if (item.name.includes('Conjured')) {
+            item.sellIn = Math.max(0, item.sellIn - 1);
+            item.quality = Math.min(50, item.sellIn <= 0 ? item.quality - 4 : item.quality - 2);
           } else {
-            item.quality = Math.max(0, item.sellIn < 0 ? item.quality - 2 : item.quality -1);
+            item.sellIn = Math.max(0, item.sellIn - 1);
+            item.quality = Math.min(50, item.quality - 1);
           }
-          item.sellIn--;
           break;
     }
   }
